@@ -14,7 +14,7 @@ class MyReads extends Component {
   
   getAll = () => {
     BooksAPI.getAll().then((data) => {
-      console.log(data);
+      //console.log(data);
       this.setState({ 
         books: data
       });
@@ -24,25 +24,29 @@ class MyReads extends Component {
   render() {
 
     return (
-        <div>
-
+      <div>
         <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
-        <div className="list-books-content">
-          <div>
-            <Shelf title="Currently Reading"/>
-            <Shelf title="Want to Read"/>
-            <Shelf title="Read"/>                
+          <div className="list-books-title">
+            <h1>MyReads</h1>
+          </div>
+          <div className="list-books-content">
+            <div>
+              <Shelf title="Currently Reading" books={this.state.books.filter((book) => 
+                book.shelf === "currentlyReading" 
+                )}/>
+              <Shelf title="Want to Read" books={this.state.books.filter((book) => 
+                book.shelf === "wantToRead" 
+                )}/>
+              <Shelf title="Read" books={this.state.books.filter((book) => 
+                book.shelf === "read" 
+              )}/>              
+            </div>
+          </div>
+          <div className="open-search">
+            <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
           </div>
         </div>
-        <div className="open-search">
-          <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-        </div>
       </div>
-
-        </div>
     )
   }
 }
