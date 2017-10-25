@@ -14,6 +14,7 @@ class MyReads extends Component {
   
   getAll = () => {
     BooksAPI.getAll().then((data) => {
+      console.log(data);
       this.setState({ 
         books: data
       });
@@ -44,11 +45,7 @@ class MyReads extends Component {
                 )}/>
               <Shelf onChange={this.handleChange} title="Read" books={this.state.books.filter((book) => 
                 book.shelf === "read" 
-              )}/>              
-              { this.state.books.filter((book) => book.shelf === "none").length > 0 ?
-                <Shelf onChange={this.handleChange} title="None" books={this.state.books.filter((book) => 
-                  book.shelf === "none" 
-                )}/> : '' }              
+              )}/>                         
             </div>
           </div>
           <div className="open-search">
