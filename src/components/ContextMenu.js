@@ -4,7 +4,7 @@ class ContextMenu extends Component {
     render() {
         return (
             <div>
-                <select>
+                <select value={this.props.book.shelf} onChange={(event) => this.props.onChange(event.target.value, this.props.book)}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>

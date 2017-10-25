@@ -14,12 +14,16 @@ class MyReads extends Component {
   
   getAll = () => {
     BooksAPI.getAll().then((data) => {
-      //console.log(data);
-      //data[0].shelf="none";
       this.setState({ 
         books: data
       });
     });
+  }
+
+  handleChange = (shelf, book) => {
+    BooksAPI.update(book, shelf).then((result) => {
+      this.getAll();
+    });  
   }
 
   render() {
@@ -32,17 +36,17 @@ class MyReads extends Component {
           </div>
           <div className="list-books-content">
             <div>
-              <Shelf title="Currently Reading" books={this.state.books.filter((book) => 
+              <Shelf onChange={this.handleChange} title="Currently Reading" books={this.state.books.filter((book) => 
                 book.shelf === "currentlyReading" 
                 )}/>
-              <Shelf title="Want to Read" books={this.state.books.filter((book) => 
+              <Shelf onChange={this.handleChange} title="Want to Read" books={this.state.books.filter((book) => 
                 book.shelf === "wantToRead" 
                 )}/>
-              <Shelf title="Read" books={this.state.books.filter((book) => 
+              <Shelf onChange={this.handleChange} title="Read" books={this.state.books.filter((book) => 
                 book.shelf === "read" 
               )}/>              
               { this.state.books.filter((book) => book.shelf === "none").length > 0 ?
-                <Shelf title="None" books={this.state.books.filter((book) => 
+                <Shelf onChange={this.handleChange} title="None" books={this.state.books.filter((book) => 
                   book.shelf === "none" 
                 )}/> : '' }              
             </div>
