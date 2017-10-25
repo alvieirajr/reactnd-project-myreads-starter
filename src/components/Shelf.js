@@ -12,7 +12,7 @@ class Shelf extends Component {
         return(
           <div>
             <div className="bookshelf">
-            <h2 className="bookshelf-title">{this.props.title}</h2>
+            <h2 className="bookshelf-title">{this.props.title} ({this.props.books.length})</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
                {this.props.books.map( (item) => (
