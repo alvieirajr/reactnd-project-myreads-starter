@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
  
-class ContextMenu extends Component {
+class ContextMenu extends Component {    
     render() {
         return (
             <div>
