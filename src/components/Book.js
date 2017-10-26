@@ -7,16 +7,16 @@ const Book = (props) => {
     let authors = (props.book.authors || []).join('; ');
     let thumbnail = ((props.book.imageLinks ? props.book.imageLinks.smallThumbnail : '') || '');
 
-    function handleChangeBookOnBook(shelf, book) {
-        props.onChange(shelf, book);
-    }
-
+    function handleChangeShelf(shelf, book) {
+        props.onChangeShelf(shelf, book);
+    }  
+        
     return (
         <div className="book">
             <div className="book-top">                                                         
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})`}}></div>
                 <div className="book-shelf-changer">
-                    <ContextMenu book={props.book} onChange={handleChangeBookOnBook}/>
+                    <ContextMenu book={props.book} onChangeShelf={handleChangeShelf}/>
                 </div>
             </div>
             <div className="book-title">{title}</div>
