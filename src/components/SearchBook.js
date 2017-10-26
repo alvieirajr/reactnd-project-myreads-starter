@@ -6,19 +6,21 @@ import Book from './Book';
 class SearchBook extends Component {
 
     state = {
+        isFetching : true,
         books : []
     }
-
+    
     searchBook() {
-        BooksAPI.search("React", 100).then(data => {
-            console.log(data);
-            console.log(data.constructor.name);
+      
+        BooksAPI.search("Satire", 100).then(data => {
             if (data.constructor.name === "Array") {
                 this.setState({
+                    isFetching : false,
                     books: data 
                 })    
             } else {
                 this.setState({
+                    isFetching : false,
                     books: []
                 })                    
             }
@@ -30,8 +32,17 @@ class SearchBook extends Component {
     }
 
     render() {
-        console.log(this.state);
-        //console.log(this.state.books.length);
+        console.log(this.state.books);
+        let isFetching = this.state.isFetching;
+        if (isFetching === false) {
+            this.state.books.map( (item) => {
+                //console.log(item.title + '   ' + item.authors.join('; '));
+            })
+        }
+
+        
+
+
         return (
             <div>
                 <div className="search-books">
@@ -43,7 +54,7 @@ class SearchBook extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                           { (this.state.books.length > 0) ? this.state.books.map( (item) => (
+                           { !isFetching ? this.state.books.map( (item) => (
                                 <li key={item.id}>
                                     <Book book={item}/>                  
                                 </li>
