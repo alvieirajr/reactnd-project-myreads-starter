@@ -10,6 +10,7 @@ class MyReads extends Component {
   }
   
   componentDidMount() {
+    console.log(this.state);
     this.getAll();
   }
   
