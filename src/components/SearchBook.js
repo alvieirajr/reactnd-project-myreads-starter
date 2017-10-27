@@ -9,41 +9,41 @@ import _ from 'underscore';
 class SearchBook extends Component {
 
     state = {
-        isFetching : true,
-        books : []
+        isFetching: true,
+        books: []
     }
 
     prepareResult(collection, result) {
-        return _.map(result, function(element) {
-            var treasure = _.findWhere(collection, { id: element.id });                
+        return _.map(result, function (element) {
+            var treasure = _.findWhere(collection, { id: element.id });
             return _.extend(element, treasure);
         });
     }
-    
-    searchBook() {  
+
+    searchBook() {
 
         let value = document.getElementById('search-input').value;
-  
+
         if (value) {
             BooksAPI.search(value, 100).then(data => {
                 //console.log(this.props.books);
                 if (data && (data.constructor.name === "Array")) {
                     this.setState({
-                        isFetching : false,
-                        books: this.prepareResult(this.props.books, data) 
-                    })    
+                        isFetching: false,
+                        books: this.prepareResult(this.props.books, data)
+                    })
                 } else {
                     this.setState({
-                        isFetching : false,
+                        isFetching: false,
                         books: []
-                    })                    
+                    })
                 }
-            }) ;
+            });
         } else {
             this.setState({
-                isFetching : false,
+                isFetching: false,
                 books: []
-            })   
+            })
         }
     }
 
@@ -62,20 +62,19 @@ class SearchBook extends Component {
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                            <input id="search-input" type="text" placeholder="Search by title or author" onKeyUp={debounce(500, this.searchBook.bind(this))}/>
+                            <input id="search-input" type="text" placeholder="Search by title or author" onKeyUp={debounce(400, this.searchBook.bind(this))} />
                         </div>
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                           { !isFetching ? this.state.books.map( (item) => (
+                            {!isFetching ? this.state.books.map((item) => (
                                 <li key={item.id}>
-                                    <Book onChangeShelf={this.handleChangeShelf} book={item}/>                  
-                                </li>                                
-                            ))  :  '' }
-                            { !isFetching && !isThereResult ? <div> No Results </div> : ''}
+                                    <Book onChangeShelf={this.handleChangeShelf} book={item} />
+                                </li>
+                            )) : ''}
                         </ol>
                     </div>
-                </div>            
+                </div>
             </div>
         )
     }

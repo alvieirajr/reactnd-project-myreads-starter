@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
- 
-class ContextMenu extends Component {    
+
+class ContextMenu extends Component {
+
     render() {
+
+        let shelf = this.props.book.shelf ? this.props.book.shelf : "";
+
         return (
-            <select value={this.props.book.shelf} onChange={(event) => this.props.onChangeShelf(event.target.value, this.props.book)}>
-                <option value="none" disabled>Move to...</option>
+            <select value={shelf} onChange={(event) => this.props.onChangeShelf(event.target.value, this.props.book)}>
+                <option value="" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>

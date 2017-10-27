@@ -1,7 +1,7 @@
 import React from 'react';
 import ContextMenu from './ContextMenu';
 
-const Book = (props) => {    
+const Book = (props) => {
 
     let title = props.book.title;
     let authors = (props.book.authors || []).join('; ');
@@ -10,14 +10,14 @@ const Book = (props) => {
     function handleChangeShelf(shelf, book) {
         book.shelf = shelf;
         props.onChangeShelf(shelf, book);
-    }  
-        
+    }
+
     return (
         <div className="book">
-            <div className="book-top">                                                         
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})`}}></div>
+            <div className="book-top">
+                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                    <ContextMenu book={props.book} onChangeShelf={handleChangeShelf}/>
+                    <ContextMenu book={props.book} onChangeShelf={handleChangeShelf} />
                 </div>
             </div>
             <div className="book-title">{title}</div>

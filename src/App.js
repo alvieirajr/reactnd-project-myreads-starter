@@ -6,39 +6,39 @@ import SearchBook from './components/SearchBook';
 import { Route } from 'react-router-dom';
 
 class BooksApp extends Component {
-  
-  state = {
-    books : []
-  }
 
-  componentDidMount() {
-    this.getBooks();
-    //console.log(this.props);
-  }  
+    state = {
+        books: []
+    }
 
-  getBooks = () => {
-    BooksAPI.getAll().then((data) => {
-      console.log(data);
-      this.setState({ 
-        books: data
-      });
-    });
-  }
+    componentDidMount() {
+        this.getBooks();
+        //console.log(this.props);
+    }
 
-  handleChangeShelf = (shelf, book) => {
-    BooksAPI.update(book, shelf).then((result) => {
-      this.getBooks();
-    });  
-  }
-  
-  render() {
-    return (
-      <div className="app">
-          <Route exact path="/" render={() => <MyReads onChangeShelf={this.handleChangeShelf} books={this.state.books}/>}/>
-          <Route path="/search" render={() => <SearchBook onChangeShelf={this.handleChangeShelf} books={this.state.books}/>}/>
-      </div>
-    )
-  }
+    getBooks = () => {
+        BooksAPI.getAll().then((data) => {
+            //console.log(data);
+            this.setState({
+                books: data
+            });
+        });
+    }
+
+    handleChangeShelf = (shelf, book) => {
+        BooksAPI.update(book, shelf).then((result) => {
+            this.getBooks();
+        });
+    }
+
+    render() {
+        return (
+            <div className="app">
+                <Route exact path="/" render={() => <MyReads onChangeShelf={this.handleChangeShelf} books={this.state.books} />} />
+                <Route path="/search" render={() => <SearchBook onChangeShelf={this.handleChangeShelf} books={this.state.books} />} />
+            </div>
+        )
+    }
 }
 
 export default BooksApp
