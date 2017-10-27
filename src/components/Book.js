@@ -8,6 +8,7 @@ const Book = (props) => {
     let thumbnail = ((props.book.imageLinks ? props.book.imageLinks.smallThumbnail : '') || '');
 
     function handleChangeShelf(shelf, book) {
+        book.shelf = shelf;
         props.onChangeShelf(shelf, book);
     }  
         

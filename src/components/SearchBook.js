@@ -47,6 +47,10 @@ class SearchBook extends Component {
         }
     }
 
+    handleChangeShelf = (shelf, book) => {
+        this.props.onChangeShelf(shelf, book);
+    }
+
     render() {
         //console.log(this.state.books);
         let isFetching = this.state.isFetching;
@@ -65,7 +69,7 @@ class SearchBook extends Component {
                         <ol className="books-grid">
                            { !isFetching ? this.state.books.map( (item) => (
                                 <li key={item.id}>
-                                    <Book book={item}/>                  
+                                    <Book onChangeShelf={this.handleChangeShelf} book={item}/>                  
                                 </li>                                
                             ))  :  '' }
                             { !isFetching && !isThereResult ? <div> No Results </div> : ''}
