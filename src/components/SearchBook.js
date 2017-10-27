@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../BooksAPI';
 import Book from './Book';
-import {debounce} from 'throttle-debounce';
+import { debounce } from 'throttle-debounce';
+import _ from 'underscore';
 
 
 class SearchBook extends Component {
@@ -11,6 +12,13 @@ class SearchBook extends Component {
         isFetching : true,
         books : []
     }
+
+    prepareResult(collection, result) {
+        return _.map(result, function(element) {
+            var treasure = _.findWhere(collection, { id: element.id });                
+            return _.extend(element, treasure);
+        });
+    }
     
     searchBook() {  
 
@@ -18,10 +26,11 @@ class SearchBook extends Component {
   
         if (value) {
             BooksAPI.search(value, 100).then(data => {
-                if (data && (data.constructor.name === "Array"))     {
+                //console.log(this.props.books);
+                if (data && (data.constructor.name === "Array")) {
                     this.setState({
                         isFetching : false,
-                        books: data 
+                        books: this.prepareResult(this.props.books, data) 
                     })    
                 } else {
                     this.setState({
