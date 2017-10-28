@@ -13,6 +13,10 @@ class SearchBook extends Component {
         books: []
     }
 
+    /* 
+        Extracted from: 
+        https://stackoverflow.com/questions/32701359/combine-two-arrays-of-objects-using-underscore
+    */
     prepareResult(collection, result) {
         return _.map(result, function (element) {
             var treasure = _.findWhere(collection, { id: element.id });
