@@ -19,7 +19,7 @@ class BooksApp extends Component {
 
     getBooks = () => {
         BooksAPI.getAll().then((data) => {
-            //console.log(data);
+            console.log(data);
             this.setState({
                 books: data,
                 isFetching: false
@@ -29,18 +29,8 @@ class BooksApp extends Component {
 
     handleChangeShelf = (shelf, book) => {
         //console.log(book);
-        this.setState({
-            books: this.state.books.map((item) => {
-                if (item.id === book.id) {
-                    item.shelf = shelf;
-                }
-                return item;
-            }),
-            isFetching: false
-        });
-
         BooksAPI.update(book, shelf).then((result) => {
-            //this.getBooks();
+            this.getBooks();
         });
     }
 

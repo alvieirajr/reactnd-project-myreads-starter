@@ -10,7 +10,7 @@ class MyReads extends Component {
 
     render() {
 
-        console.log(this.props.isFetching);
+        //console.log(this.props.isFetching);
 
         return (
             <div>
@@ -19,7 +19,7 @@ class MyReads extends Component {
                         <h1>MyReads</h1>
                     </div>
                     {!this.props.isFetching ? 
-                    <div>
+                    <div className="fadeout">
                     <div className="list-books-content">
                         <div>
                             <Shelf onChangeShelf={this.handleChangeShelf} title="Currently Reading" books={this.props.books.filter((book) =>
