@@ -53,8 +53,7 @@ class SearchBook extends Component {
 
     render() {
         //console.log(this.state.books);
-        let isFetching = this.state.isFetching;
-        let isThereResult = this.state.books.lenght > 0;
+        let isFetching = this.state.isFetching;        
 
         return (
             <div>

@@ -10,12 +10,16 @@ class MyReads extends Component {
 
     render() {
 
+        console.log(this.props.isFetching);
+
         return (
             <div>
                 <div className="list-books">
                     <div className="list-books-title">
                         <h1>MyReads</h1>
                     </div>
+                    {!this.props.isFetching ? 
+                    <div>
                     <div className="list-books-content">
                         <div>
                             <Shelf onChangeShelf={this.handleChangeShelf} title="Currently Reading" books={this.props.books.filter((book) =>
@@ -31,7 +35,8 @@ class MyReads extends Component {
                     </div>
                     <div className="open-search">
                         <Link to="/search">Add a book</Link>
-                    </div>
+                    </div> 
+                    </div>: ''}
                 </div>
             </div>
         )
